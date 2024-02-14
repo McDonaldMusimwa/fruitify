@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware'
 import { round2 } from '../utils'
 import { OrderItem } from '../models/OrderModel'
 
+
 type Cart = {
     items: OrderItem[]
     itemsPrice: number

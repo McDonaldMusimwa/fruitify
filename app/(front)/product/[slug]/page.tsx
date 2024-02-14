@@ -3,9 +3,28 @@ import data from "@/lib/data";
 import Link from "next/link";
 import Image from "next/image";
 import AddToCart from "@/components/products/AddToCart";
+import productService from "@/lib/service/productService";
+import { convertDocToObject } from "@/lib/utils";
 
-const ProductDetails = ({ params }: { params: { slug: string } }) => {
-  const product = data.products.find((x) => x.slug === params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}) {
+  const product = await productService.getBySlug(params.slug)
+  if (!product) {
+    return { title: 'Product not found' }
+  }
+  return {
+    title: product.name,
+    description: product.description,
+  }
+}
+
+
+
+const ProductDetails = async ({ params }: { params: { slug: string } }) => {
+  const product =await productService.getBySlug(params.slug);
   if (!product) {
     return <div>Product not found</div>;
   }
@@ -60,7 +79,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
               </div>
               {product.countInStock !== 0 && (
                 <div className="card-actions justify-center">
-                  <AddToCart item={{ ...product, qty: 0 }} />
+                  <AddToCart item={{ ...convertDocToObject(product), qty: 0 }} />
                 </div>
               )}
             </div>
