@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import Menu from "./Menu";
+import Image from "next/image";
+import Logo from "@/public/images/logo.png";
 
 const Header = () => {
   return (
@@ -8,7 +10,7 @@ const Header = () => {
       <nav>
         <div className="navbar justify-between bg-base-300">
           <Link href="/" className="btn btn-ghost text-lg">
-            Next Fruitify
+            <Image src={Logo} width={80} height={50} alt="logo"></Image>
           </Link>
           <Menu />
         </div>

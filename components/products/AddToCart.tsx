@@ -30,7 +30,7 @@ export default function AddToCart({ item }: { item: OrderItem }) {
     </div>
   ) : (
     <button
-      className="btn btn-primary w-full"
+      className="btn bg-lime-500 w-full"
       type="button"
       onClick={AddToCartHandler}
     >Add to cart</button>
