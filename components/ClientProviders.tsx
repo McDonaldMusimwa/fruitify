@@ -1,7 +1,8 @@
 'use client'
-/*
-import { cartStore } from '@/lib/hooks/useCartStore'
-import useLayoutService from '@/lib/hooks/useLayout'
+
+import { cartStore } from '@/lib/hooks/useCartStone'
+import useLayoutService from '@/lib/hooks/useLayOut'
+
 import { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { SWRConfig } from 'swr'
@@ -52,4 +53,3 @@ export default function ClientProviders({
   )
 }
 
-*/

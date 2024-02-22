@@ -4,7 +4,9 @@ import dbConnect from './dbConnect'
 import UserModel from './models/UserModel'
 import NextAuth from 'next-auth'
 
+
 export const config = {
+
   providers: [
     CredentialsProvider({
       credentials: {
@@ -13,22 +15,31 @@ export const config = {
         },
         password: { type: 'password' },
       },
+
       async authorize(credentials) {
         await dbConnect()
         if (credentials == null) return null
 
-        const user = await UserModel.findOne({ email: credentials.email })
+        
+        try {
+          const user = await UserModel.findOne({ email: credentials.email });
+          if (user) {
 
-        if (user) {
-          const isMatch = await bcrypt.compare(
-            credentials.password as string,
-            user.password
-          )
-          if (isMatch) {
-            return user
+            const isMatch = await bcrypt.compare(
+              credentials.password as string,
+              user.password
+            )
+            if (isMatch) {
+              console.log("User found:", user);
+              return user
+            }
           }
+          return null
+        } catch (error) {
+          console.error("Error fetching user:", error);
         }
-        return null
+
+
       },
     }),
   ],
@@ -37,7 +48,21 @@ export const config = {
     newUser: '/register',
     error: '/signin',
   },
+
   callbacks: {
+    authorized({ request, auth }: any) {
+      const protectedPaths = [
+        /\/shipping/,
+        /\/payment/,
+        /\/place-order/,
+        /\/profile/,
+        /\/order\/(.*)/,
+        /\/admin/,
+      ];
+      const { pathname } = request.nextUrl;
+      if (protectedPaths.some(p => p.test(pathname))) return !!auth; // Ensure you're returning a boolean value here
+      return true;
+    },
     async jwt({ user, trigger, session, token }: any) {
       if (user) {
         token.user = {
@@ -62,7 +87,8 @@ export const config = {
       }
       return session
     },
-  },
+  }
+
 }
 
 export const {

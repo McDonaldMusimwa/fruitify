@@ -1,9 +1,7 @@
-'use client';
-
 import { auth } from '@/lib/auth';
 import { SessionProvider } from 'next-auth/react';
 
-const Providers = async ({ children }: { children: React.ReactNode }) => {
+ export default async function Providers ({ children }: { children: React.ReactNode }) {
   const session = await auth();
 
   return (
@@ -13,7 +11,7 @@ const Providers = async ({ children }: { children: React.ReactNode }) => {
   );
 }
 
-export default Providers;
+
 
 
 
