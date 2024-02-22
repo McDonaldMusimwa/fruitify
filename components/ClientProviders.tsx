@@ -1,6 +1,6 @@
 'use client'
 
-import { cartStore } from '@/lib/hooks/useCartStone'
+import { cartStore } from '@/lib/hooks/useCartStore'
 import useLayoutService from '@/lib/hooks/useLayOut'
 
 import { useEffect, useState } from 'react'
