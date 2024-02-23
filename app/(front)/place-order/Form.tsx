@@ -125,15 +125,17 @@ const Form = () => {
                             width={50}
                             height={50}
                           ></Image>
+                          {/*
                           <span className="px-2">
                             {item.name}({item.color} {item.size})
                           </span>
+                          */}
                         </Link>
                       </td>
                       <td>
                         <span>{item.qty}</span>
                       </td>
-                      <td>${item.price}</td>
+                      <td>R {item.price}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -155,25 +157,25 @@ const Form = () => {
                 <li>
                   <div className=" flex justify-between">
                     <div>Items</div>
-                    <div>${itemsPrice}</div>
+                    <div>R {itemsPrice}</div>
                   </div>
                 </li>
                 <li>
                   <div className=" flex justify-between">
                     <div>Tax</div>
-                    <div>${taxPrice}</div>
+                    <div>R {taxPrice}</div>
                   </div>
                 </li>
                 <li>
                   <div className=" flex justify-between">
                     <div>Shipping</div>
-                    <div>${shippingPrice}</div>
+                    <div>R {shippingPrice}</div>
                   </div>
                 </li>
                 <li>
                   <div className=" flex justify-between">
                     <div>Total</div>
-                    <div>${totalPrice}</div>
+                    <div>R {totalPrice}</div>
                   </div>
                 </li>
 
