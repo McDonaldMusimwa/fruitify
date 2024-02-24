@@ -62,20 +62,7 @@ export const config = {
       }
       return token
     },
-    authorized({ request, auth }: any) {
-      const protectedPaths = [
-        /\/shipping/,
-        /\/payment/,
-        /\/place-order/,
-        /\/profile/,
-        /\/order\/(.*)/,
-        /\/admin/,
-      ];
-      const { pathname } = request.nextUrl;
-      if (protectedPaths.some(p => p.test(pathname))) return !!auth; // Ensure you're returning a boolean value here
-      return true;
-    },
-
+   
     session: async ({ session, token }: any) => {
       if (token) {
         session.user = token.user
