@@ -15,7 +15,7 @@ const Header = () => {
       <nav>
         <div className="navbar justify-between bg-base-300">
           <Link href="/" className="btn btn-ghost text-lg">
-            <Image src={Logo} width={80} height={50} alt="logo"></Image>
+            <Image src={Logo} width={80} alt="logo"></Image>
           </Link>
           <Menu />
         </div>

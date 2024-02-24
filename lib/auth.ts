@@ -45,7 +45,10 @@ export const config = {
     async jwt({ user, trigger, session, token }: any) {
       if (user) {
 
+        
+        
         token.user = user._doc;
+        //token.user = senduser;
 
 
 

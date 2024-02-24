@@ -1,7 +1,7 @@
 "use client";
 import useCartService from "@/lib/hooks/useCartStore";
 import useLayoutService from "@/lib/hooks/useLayOut";
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from "next-auth/react";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -13,25 +13,24 @@ const Menu = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
-  
+
   const signoutHandler = () => {
-    signOut({ callbackUrl: '/signin' })
+    signOut({ callbackUrl: "/signin" });
     //init()
-  }
+  };
 
-  const { data: session } = useSession()
-console.log(session)
-  const { theme, toggleTheme } = useLayoutService()
-
+  const { data: session } = useSession();
+ 
+  const usersession  = session?.user;
+  const { theme, toggleTheme } = useLayoutService();
+  console.log(usersession);
   const handleClick = () => {
-    ;(document.activeElement as HTMLElement).blur()
-  }
+    (document.activeElement as HTMLElement).blur();
+  };
 
   return (
     <>
-<div className="hidden md:block">
-       {/*  <SearchBox />  */}
-      </div>
+      <div className="hidden md:block">{/*  <SearchBox />  */}</div>
       <div>
         <ul className="flex items-stretch">
           <i>
@@ -40,7 +39,7 @@ console.log(session)
                 {/* this hidden checkbox controls the state */}
                 <input
                   type="checkbox"
-                  checked={theme === 'light'}
+                  checked={theme === "light"}
                   onChange={toggleTheme}
                 />
 
@@ -69,7 +68,7 @@ console.log(session)
               Cart
               {mounted && items.length != 0 && (
                 <div className="badge badge-primary">
-                  {items.reduce((a, c) => a + c.qty, 0)}{' '}
+                  {items.reduce((a, c) => a + c.qty, 0)}{" "}
                 </div>
               )}
             </Link>
@@ -99,12 +98,12 @@ console.log(session)
                     tabIndex={0}
                     className="menu dropdown-content z-[1] p-2 shadow bg-base-300 rounded-box w-52 "
                   >
-                   
-                    {session.user.isAdmin && (
+                    {usersession && usersession.isAdmin && (
                       <li onClick={handleClick}>
                         <Link href="/admin/dashboard">Admin Dashboard</Link>
                       </li>
                     )}
+                    {/* 
 
                     <li onClick={handleClick}>
                       <Link href="/order-history">Order history </Link>
@@ -112,6 +111,7 @@ console.log(session)
                     <li onClick={handleClick}>
                       <Link href="/profile">Profile</Link>
                     </li>
+                    */}
                     <li onClick={handleClick}>
                       <button type="button" onClick={signoutHandler}>
                         Sign out
@@ -134,7 +134,6 @@ console.log(session)
           )}
         </ul>
       </div>
-
     </>
   );
 };

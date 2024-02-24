@@ -32,7 +32,7 @@ export default function OrderDetails({
   )
 
   const { data: session } = useSession()
-  console.log(session)
+let sessionuser = session?.user;
   function createPayPalOrder() {
     return fetch(`/api/orders/${orderId}/create-paypal-order`, {
       method: 'POST',
@@ -194,7 +194,7 @@ export default function OrderDetails({
                     </PayPalScriptProvider>
                   </li>
                 )}
-                {session?.user.isAdmin && (
+                {sessionuser.isAdmin && (
                   <li>
                     <button
                       className="btn w-full my-2"
