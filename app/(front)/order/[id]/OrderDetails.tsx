@@ -194,7 +194,8 @@ let sessionuser = session?.user;
                     </PayPalScriptProvider>
                   </li>
                 )}
-                {sessionuser.isAdmin && (
+                {// @ts-ignore
+                sessionuser?.isAdmin && (
                   <li>
                     <button
                       className="btn w-full my-2"
