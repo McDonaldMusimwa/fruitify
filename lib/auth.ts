@@ -63,6 +63,7 @@ export const config = {
       return token
     },
    
+
     session: async ({ session, token }: any) => {
       if (token) {
         session.user = token.user

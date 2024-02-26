@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const ProductItem = ({ product }: { product: Product }) => {
+ 
   return (
     <div className="card bg-base-300 shadow-xl mb-4">
       <figure>

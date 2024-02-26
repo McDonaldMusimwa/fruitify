@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from "react";
 
 export default function AddToCart({ item }: { item: OrderItem }) {
+  console.log(item)
   const router = useRouter();
   const { items, increase,decrease } = useCartService();
   const [existItem, setExistItem] = useState<OrderItem | undefined>();

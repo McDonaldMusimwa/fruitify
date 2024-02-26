@@ -3,6 +3,7 @@ import OrderModel from '@/lib/models/OrderModel'
 import { auth } from '@/lib/auth'
 
 export const GET = auth(async (req: any) => {
+  console.log("post order in mine")
   if (!req.auth) {
     return Response.json(
       { message: 'unauthorized' },

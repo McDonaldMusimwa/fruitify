@@ -23,7 +23,7 @@ const Menu = () => {
  
   const usersession  = session?.user;
   const { theme, toggleTheme } = useLayoutService();
-  console.log(usersession);
+
   const handleClick = () => {
     (document.activeElement as HTMLElement).blur();
   };

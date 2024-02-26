@@ -40,6 +40,7 @@ const Form = () => {
         }),
       })
       const data = await res.json()
+      console.log("place order ts" + data)
       if (res.ok) {
         clear()
         toast.success('Order placed successfully')

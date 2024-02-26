@@ -3,6 +3,7 @@ import OrderModel from '@/lib/models/OrderModel'
 import { auth } from '@/lib/auth'
 
 export const GET = auth(async (...request: any) => {
+  console.log("fetch order ")
   const [req, { params }] = request
   if (!req.auth) {
     return Response.json(
@@ -14,5 +15,6 @@ export const GET = auth(async (...request: any) => {
   }
   await dbConnect()
   const order = await OrderModel.findById(params.id)
+  console.log("order fetched" + order)
   return Response.json(order)
 }) as any

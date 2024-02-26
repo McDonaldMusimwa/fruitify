@@ -16,7 +16,8 @@ const calcPrices = (orderItems: OrderItem[]) => {
 }
 
 export const POST = auth(async (req: any) => {
-    if (req.auth) {
+
+    if (!req.auth) {
         return Response.json(
             { message: 'unauthorized' },
             {
@@ -24,19 +25,23 @@ export const POST = auth(async (req: any) => {
             }
         )
     }
+    
 
     const { user } = req.auth
+
     try {
         const payload = await req.json()
+       
         await dbConnect()
-        const dbProductPrices = await ProductModel.find({ _id: { $in: payload.items.map((x: { _id: string }) => x._id) }, }, 'price')
+        const dbProductPrices = await ProductModel.find({ _id: { $in: payload.items.map((x: { _id: string }) => x._id) } }, 'price');
 
+       
         const dbOrderItems = payload.items.map((x: { _id: string }) => ({
             ...x,
             product: x._id,
             price: dbProductPrices.find((x) => x._id === x._id).price,  //,_id:undefined
         }))
-
+       
         const { itemsPrice, taxPrice, shippingPrice, totalPrice } = calcPrices(dbOrderItems)
         const newOrder = new OrderModel({
             items: dbOrderItems,
